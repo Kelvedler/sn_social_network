@@ -15,7 +15,7 @@ class AnalyticsSerializer(serializers.Serializer):
         date_from = attrs.get('date_from')
         date_to = attrs.get('date_to')
         if date_from and date_to and date_from > date_to:
-            raise exceptions.ValidationError('date_from before date_to')
+            raise exceptions.ValidationError('date_from after date_to')
         return attrs
 
 
