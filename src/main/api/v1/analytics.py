@@ -11,6 +11,13 @@ class AnalyticsSerializer(serializers.Serializer):
     date_from = serializers.DateField(required=False)
     date_to = serializers.DateField(required=False)
 
+    def validate(self, attrs):
+        date_from = attrs.get('date_from')
+        date_to = attrs.get('date_to')
+        if date_from and date_to and date_from > date_to:
+            raise exceptions.ValidationError('date_from before date_to')
+        return attrs
+
 
 class LikesViewSet(viewsets.ViewSet):
 
